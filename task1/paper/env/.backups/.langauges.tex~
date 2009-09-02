@@ -1,0 +1,4 @@
+%\selectlanguage{danish}
+\lstset{language=Python,basicstyle=\small,
+  columns=fullflexible}
+
