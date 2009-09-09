@@ -23,6 +23,9 @@ if (  (y  - 1.7071) > 0.001 )
 end
 
 figure(1);
+subplot(2,2,1);
+axis([0,10,0,10]);
+
 clf;
 hold on;
 title('Inverse Kinematic Chain');
