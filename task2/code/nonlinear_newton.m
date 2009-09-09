@@ -17,7 +17,8 @@ for i=1:50
     da = pinv(jacobian(t, angles, e))*(g - ep);
     angles = angles + da;
     ep = f(t, angles);
-    err(i)  = log(norm(g-ep));
+    error = g-ep;
+    err(i)  = log(dot(error,error));
     iter(i) = i;
 end
 

@@ -16,7 +16,7 @@ err  = zeros(1,50);
 
 lambda   = 0.0001;
 
-oldError = norm(goal-endPoint);
+oldError = dot(goal-endPoint,goal-endPoint);
 
 for i = 1:50
     % Compute new angles, endpoint and error
@@ -31,7 +31,8 @@ for i = 1:50
         delta = LMupdate(lambda, J, r);
         newAngles   = angles + delta;
         newEndPoint = f(t, newAngles);    
-        newError = norm(goal-newEndPoint);
+        error = goal-newEndPoint;
+        newError = dot(error, error);
     end
     
     % ACCEPT
