@@ -11,10 +11,18 @@ function [ angles ] = nonlinear_newton( g, t, angles )
 e  = [0;0;1];
 ep = f(t, angles);
 
-for i=1:20
+iter = zeros(1,50);
+err  = zeros(1,50);
+for i=1:50
     da = pinv(jacobian(t, angles, e))*(g - ep);
     angles = angles + da;
     ep = f(t, angles);
+    err(i)  = log(norm(g-ep));
+    iter(i) = i;
 end
+
+subplot(2,2,3);
+plot(iter, err);
+axis([0 50 -10 2]);
 
 end

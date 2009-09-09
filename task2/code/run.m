@@ -23,16 +23,40 @@ if (  (y  - 1.7071) > 0.001 )
 end
 
 figure(1);
+
 clf;
 hold on;
 title('Inverse Kinematic Chain');
 xlabel('X');
 ylabel('Y');
+
+subplot(2,2,1);
 draw_chain( t, angles );
+subplot(2,2,2);
+draw_chain( t, angles );
+
+theaxis = [-4 4 -4 4];
 for n = 1:20
+    % Newton
+    subplot(2,2,1);
+    
     [gx,gy] = ginput(1);
     plot(gx,gy,'bo');
+    angles = zeros(size(angles));
     angles = nonlinear_newton([gx; gy; 1],t,angles);
+    subplot(2,2,1);
     draw_chain( t, angles );
+    
+    axis(theaxis);
+    
+    % Levenberg
+    subplot(2,2,2);
+    plot(gx,gy,'bo');
+    angles = zeros(size(angles));
+    angles = levenberg_marquardt([gx; gy; 1],t,angles);
+    subplot(2,2,2);
+    draw_chain( t, angles );
+    
+    axis(theaxis);
 end
 hold off;
