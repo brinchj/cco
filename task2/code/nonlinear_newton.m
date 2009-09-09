@@ -1,0 +1,20 @@
+function [ angles ] = nonlinear_newton( g, t, angles )
+%
+% input
+%     g      : Goal position/vector (specified in homogenuous coordinates)
+%     t      : A vector of fixed rod-link vectors
+%     angles : A vector with joint angles
+%     e      : Position/vector (specified in homogenuous coordinates)
+% output
+%     angles : The updated pose which will reach the specified goal position.
+
+e  = [0;0;1];
+ep = f(t, angles);
+
+for i=1:20
+    da = pinv(jacobian(t, angles, e))*(g - ep);
+    angles = angles + da;
+    ep = f(t, angles);
+end
+
+end

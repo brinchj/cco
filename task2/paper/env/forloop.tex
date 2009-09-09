@@ -1,0 +1,17 @@
+%% FOR LOOP
+\usepackage{ifthen,calc}
+\newcounter{myforloopcounter}
+\newcommand{\forloop}[5][1]% 
+{\setcounter{#2}{#3}% 
+\ifthenelse{#4}% 
+{#5%
+  \addtocounter{#2}{#1}% 
+  \forloop[#1]{#2}{\value{#2}}{#4}{#5}% 
+}%
+% Else 
+{}%
+}% 
+
+
+%% USAGE
+%\forloop[step]{counter}{initial_value}{conditional}{code_block} 
