@@ -25,6 +25,14 @@
 \maketitle
 \newpage
 
+
+\section{Introduction}
+This task consists of finding three angles that together will move an
+``arm'' to some specified point in the 2D-plane. Specifically, one
+must optimize the angles using Newton's method to get a good
+approximation of the angles needed.
+
+
 \section*{A: End-Effector Function}
 A homegenous transformation works by multiplying $n$ matrices (one for
 each connecting angle) with a point, like so: $T_0T_1T_2 \ldots T_n
@@ -101,8 +109,10 @@ in on zero.
 
 
 
+\section*{Implementation}
 
-\section*{Pseudo Code}
+\subsection*{Pseudo Code}
+Here are the pseudo code for the root finder:
 \begin{verbatim}
 ik-solver(t0, g, e)
  t = t0
@@ -116,7 +126,79 @@ ik-solver(t0, g, e)
 end
 \end{verbatim}
 
+\subsection*{Nonlinear Newton}
+This is my implementation of the nonlinear Newton's method. As can be
+seen, the implementation always runs for 20 rounds (this could be
+replaced by an error meassure):
+\begin{verbatim}
+function [ angles ] = nonlinear_newton( g, t, angles )
+%
+% input
+%     g      : Goal position/vector (specified in homogenuous coordinates)
+%     t      : A vector of fixed rod-link vectors
+%     angles : A vector with joint angles
+%     e      : Position/vector (specified in homogenuous coordinates)
+% output
+%     angles : The updated pose which will reach the specified goal position.
 
+e  = [0;0;1];
+ep = f(t, angles);
+
+for i=1:20
+    da = pinv(jacobian(t, angles, e))*(g - ep);
+    angles = angles + da;
+    ep = f(t, angles);
+end
+
+end
+\end{verbatim}
+
+\subsection*{F-function}
+This is my implementation of the $f$ function:
+\begin{verbatim}
+function [ e ] = f( t, angles, e )
+% F The end-effector function
+%   Given an initial configuration of a inverse kinematics chain
+%   with a root fixed at the origin this function computes
+%   the x-y position of the end-effector.
+% input
+%     t      : A vector of fixed rod-link vectors
+%     angles : A vector with joint angles
+%     e      : Position/vector (specified in homogenuous coordinates)
+% output
+%     e : The end-effector position/vector given in root frame
+if nargin < 3
+  e = [0.0;  0.0; 1.0];
+end
+
+% Generate transformation matrices
+for i=1:length(angles)
+    j = length(angles)-i+1;
+    angle = angles(j);
+    m = [
+        cos(angle), -sin(angle), t(1,j);
+        sin(angle), cos(angle),  t(2,j);
+        0, 0, 1
+        ];
+    e = m * e;
+end
+
+if( ~isequal(e(3),0))
+    e = e./e(3);
+end
+end
+\end{verbatim}
+
+
+\subsection*{Verification of Implementation}
+I have tested the implementation briefly, by picking out some points
+at random. The results seems correct:\\
+\includegraphics[scale=.7]{shot.png}
+
+The image suggests that the code works correctly, since the arms are
+touching the points i chose. There can however exist points (example
+out of reach of the arm) that I have not tested due to time
+limitations.
 
 
 

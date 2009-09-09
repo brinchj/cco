@@ -17,6 +17,17 @@ end
 % TODO write code that compute e wrt. the root frame
 %
 
+% Generate transformation matrices
+for i=1:length(angles)
+    j = length(angles)-i+1;
+    angle = angles(j);
+    m = [ 
+        cos(angle), -sin(angle), t(1,j);
+        sin(angle), cos(angle),  t(2,j);
+        0, 0, 1
+        ];
+    e = m * e;
+end
 
 if( ~isequal(e(3),0))
     e = e./e(3);

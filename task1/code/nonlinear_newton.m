@@ -1,4 +1,4 @@
-function [ angles ] = nonlinear_newton( g, t, angles, e )
+function [ angles ] = nonlinear_newton( g, t, angles )
 %
 % input
 %     g      : Goal position/vector (specified in homogenuous coordinates)
@@ -8,8 +8,13 @@ function [ angles ] = nonlinear_newton( g, t, angles, e )
 % output
 %     angles : The updated pose which will reach the specified goal position.
 
-%
-% TODO write implemetation here!!!
-%
+e  = [0;0;1];
+ep = f(t, angles);
+
+for i=1:20
+    da = pinv(jacobian(t, angles, e))*(g - ep);
+    angles = angles + da;
+    ep = f(t, angles);
+end
 
 end
