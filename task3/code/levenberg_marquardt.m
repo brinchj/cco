@@ -19,7 +19,7 @@ oldError = dot(goal-endPoint,goal-endPoint);
 
 count = 0;
 J = jacobian(t, angles, e);
-while dot(J*endPoint, J*endPoint) > 0.001 && count < 50
+while dot(J'*(goal-endPoint), J'*(goal-endPoint)) > 0.01 && count < 50
     % Compute new angles, endpoint and error
     r = goal - endPoint;
     J = jacobian(t, angles, e);
@@ -43,7 +43,7 @@ while dot(J*endPoint, J*endPoint) > 0.001 && count < 50
     lambda = lambda / 2;
 
     % Remember observed error
-    err = [ err log(oldError) ];
+    err = [ err oldError ];
     count = count + 1;
 end
 

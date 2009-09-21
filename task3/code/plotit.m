@@ -1,14 +1,15 @@
-function plotit(name, method, gx, gy, angles, i, N)
-    t = [ 0 0 0; 1 1 1];
-
+function plotit(name, method, t, gx, gy, angles, i, N)
     [res new_angles] = method([gx; gy; 1], t, angles);
 
     subplot(N, 2, 2*i+1);
     plot(gx, gy, 'bo');
-    legend(name);
+    legend(['Goal: ( ', num2str(gx), ', ', num2str(gy), ' )']);
     draw_chain(t, new_angles);
     axis([-4 4 -4 4]);
+    title(name);
+
     subplot(N, 2, 2*i+2);
-    plot(res);
-    legend([name,' ERR']);
+    semilogy(res);
+    legend('Error');
+    title(name);
 end

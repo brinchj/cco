@@ -15,14 +15,15 @@ err  = [];
 
 J = 1;
 count = 0;
-while dot(J'*(g-ep),J'*(g-ep)) > 0.001 && count < 50
-    J = jacobian(t, angles, e);
+J = jacobian(t, angles, e);
+while dot(J'*(g-ep),J'*(g-ep)) > 0.01 && count < 50
     da = pinv(J)*(g-ep);
     angles = angles + da;
     ep = f(t, angles);
     error = g-ep;
-    err = [err log(dot(error,error))];
+    err = [err dot(error,error)];
     count = count + 1;
+    J = jacobian(t, angles, e);
 end
 
 end
