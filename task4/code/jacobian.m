@@ -12,7 +12,7 @@ function [ J ] = jacobian( t, angles, e )
 if nargin < 3
     e = [0.0;  0.0; 1.0];
 end
-N = length(angles)  % Number of joints/links in chain
+N = length(angles);  % Number of joints/links in chain
 J = zeros(3,N);
 for i=N:-1:1
     % Compute position of end-effector wrt. i'th joint frame

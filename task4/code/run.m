@@ -3,7 +3,7 @@ close all;
 clear all;
 
 % Setup a default configuration
-num_angles = 5;
+num_angles = 3;
 t      = [ zeros(1,num_angles); ones(1,num_angles) ];
 angles = [ ones(num_angles,1) * pi/4 ];
 
@@ -26,21 +26,22 @@ y = e(2);
 
 % points to test
 points = [
-    -4 4;
+%    -4 4;
     2.1011 -1.2345;
     .7501 -.6502;
     3 3               % outside reach
 ];
 
 
-for i = 1:2 %length(points)
+for i = 1:1 %length(points)
     fig = figure(i);
 
     x = points(i,1);
     y = points(i,2);
 
-    plotit('Nonlinear Newton',    @nonlinear_newton,    t, x, y, angles, 0, 3);
-    plotit('Levenberg Marquardt', @levenberg_marquardt, t, x, y, angles, 1, 3);
-    plotit('BFGS',                @bfgs,                t, x, y, angles, 2, 3);
+    %plotit('Nonlinear Newton',    @nonlinear_newton,    t, x, y, angles, 0, 3);
+    %plotit('Levenberg Marquardt', @levenberg_marquardt, t, x, y, angles, 1, 3);
+    %plotit('BFGS',                @bfgs,                t, x, y, angles, 0, 2);
+    plotit('DogLeg',              @dogleg,              t, x, y, angles, 0, 2);
 end
 %saveas(fig, 'graph.eps', 'eps2c');
