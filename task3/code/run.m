@@ -3,7 +3,7 @@ close all;
 clear all;
 
 % Setup a default configuration
-num_angles = 10;
+num_angles = 5;
 t      = [ zeros(1,num_angles); ones(1,num_angles) ];
 angles = [ ones(num_angles,1) * pi/4 ];
 
@@ -26,15 +26,14 @@ y = e(2);
 
 % points to test
 points = [
-    1 1; % simple points
-    0.1415 3.1415;    % funky points
+    -4 4;
     2.1011 -1.2345;
     .7501 -.6502;
     3 3               % outside reach
 ];
 
 
-for i = 1:1 %length(points)
+for i = 1:2 %length(points)
     fig = figure(i);
 
     x = points(i,1);

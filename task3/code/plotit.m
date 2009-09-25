@@ -5,7 +5,9 @@ function plotit(name, method, t, gx, gy, angles, i, N)
     plot(gx, gy, 'bo');
     legend(['Goal: ( ', num2str(gx), ', ', num2str(gy), ' )']);
     draw_chain(t, new_angles);
-    axis([-4 4 -4 4]);
+
+    NA = length(angles);
+    axis([-NA NA -NA NA]);
     title(name);
 
     subplot(N, 2, 2*i+2);

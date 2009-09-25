@@ -63,12 +63,12 @@ computation time due to the approximations.
 
 \section{Armijo Backtracking}
 
-To figure out when a step length can be considered a good choice, some
-restrictions on the resulting point has been suggested. One of these
-are the Armijo condition. The Armijo condition states that the
-function value in the new point should be no more than that of the
-tangent of the current point (relaxed by some constant). This
-condition is formalized as:
+To figure out when a step length can be considered a \textit{good}
+choice, some restrictions on the resulting point has been
+suggested. One of these are the Armijo condition. The Armijo condition
+states that the function value in the new point should be no more than
+that of the tangent of the current point (relaxed by some
+constant). This condition is formalized as:
 \[ f(x_k + \alpha_k p_k) \leq f(x_k) +
 \alpha_k c_1 p_k^T \nabla f(x_k) \]
 
@@ -101,19 +101,99 @@ method. As so it approximates the inverse of the hessian. This
 approximation $B_k$ is updated in each iteration like so:
 \[ B_{k+1} = B_k + U_k + V_k \]
 
-Where $U_k$ and $V_k$ are update matrices.
+Where $U_k$ and $V_k$ are update matrices. Let $y_k$ be specified by:
+\[ y_k = \nabla f(x_k + \alpha p_k) - \nabla f(x_k) \]
+
+The two update matrices $U_k$ and $V_k$ can now be described as:
+\[ U_k = \frac{y_ky_k^T}{y_k^Tp_k} \]
+\[ V_k = \frac{B_kp_k(B_kp_k)^T}{p_k^TB_kp_k} \]
+
+These matrices can be used to update the approximation of the hessian,
+however in my implementation I approximate the inverse of the hessian
+and hence use two slightly different matrices:
+\[ U_k' = \frac{(p_kp_k^T) (p_k^Ty_k + y_k^TB_k^{-1}y_k}{(p_k^Ty_k)^2} \]
+\[ V_k' = - \frac{B^{-1}y_kp_k^T + p_ky_k^TB_k^{-1}}{p_k^Ty_k} \]
+
+The update step of the approximation of the inverse hessian now
+becomes:
+\[ B^{-1}_{k+1} = B^{-1}_k + U'_k + V'_k \]
+
+The implementation uses the identity matrix as the initial
+approximation.
 
 
 \section{Implementation}
-This section MatLab code modified during the implementation.
+This section contains the MatLab code for the BFGS implementation. I
+also updated the source code for the other two methods slightly,
+however I considered the changes too small to include here.
 
-\subsection*{Pseudo Code for LM}
+\subsection{Armijo Backtracking}
+\verbatiminput{../code/armijo_backtrack.m}
+\subsection{BFGS}
+\verbatiminput{../code/bfgs.m}
 
 
 \section{Verification}
-\includegraphics[width=\textwidth]{images/graph.pdf}
+In this section I compare the performance of the three algorithms
+(Nonlinear Newton's Method, Levenberg Marquardt and BFGS).
+
+I apologize for the small graphs, but MatLab generates white margins
+around the graphs and ImageMagick cannot remove them without
+destroying the vector format. However, since the graphs are in vector
+graphics, it is possible to enlarge them (e.g. using a zoom feature).
+
+\noindent
+\includegraphics[width=\textwidth]{images/graph1.pdf}
+This graph illustrates what I would have expected when I first started
+to implement BFGS. It uses more iterations than Levenberg, but since
+its iterations are cheaper it could very well be faster. In this case
+methods finds a nice solution to the problem in few iterations.
+
+\noindent
+\includegraphics[width=\textwidth]{images/graph2.pdf}
+In this case Newton's method fails to find an acceptable solution
+while both Levenberg and BFGS finds one. This is because the selected
+point is outside the reach of the ``arm''. I am not sure if I
+understand why BFGS stops after just 7 iterations; far from the
+goal. This should only happen if the gradient is very small.
+
+\noindent
+\includegraphics[width=\textwidth]{images/graph3.pdf}
+Here Newton's method performs very well. Somehow this goal fits
+perfectly with the process of Newton's method. BFGS keeps up using
+just 4 iterations, however with a somewhat less confident
+convergence. Levenberg doesn't perform well here with about 27
+iterations.
 
 
+\noindent
+\includegraphics[width=\textwidth]{images/graph4.pdf}
+I find this plot very interesting. All the methods manage to find a
+solution in just few iterations, but look at BFGS's convergence graph.
+It was very close to the goal after just 3 iterations, but then
+something happened. What I think is, that $\alpha$ was chosen too
+large. It jumped over the solution. This could happend if the
+Armijo-condition could not be satisfied within the accepted size of
+$\alpha$. In this case, the impementation takes a small step to ensure
+movement to a new point, even though the step is up hill. Luckily
+another solution was just around the corner at 9 iterations.
+
+
+\section{Conclusion}
+I have implemented the BFGS line-search method and compared this to
+the previous implementations of the nonlinear Newton's method and
+Leveberg-Marquardt.
+
+With respect to the optimizations performed as part of the
+verification the BFGS seems to perform better than the other
+methods. It does not always use less iterations, but its iterations
+are significantly faster to compute, since it avoids computation of
+both the hessian and matrix inversion.
+
+This one is for you Morten: The reason my results were imprecise was
+that I had mistakingly computed an approximation of the Hessian - and
+not its inverse. Fixing this gave a more precise approximation of the
+inverse and hence more precise solutions with better convergence.
 
 
 
