@@ -68,9 +68,10 @@ a distance lower than $\lambda$ away from $x_k$ is called the
 
 
 \section{Dog-Leg Method}
-The Dog-Leg method is based on a combination of the Cauchy point and
-a Quasi-Newton method. It will choose its search direction based on
-the following three cases:
+The Dog-Leg method is based on a combination of the Cauchy point and a
+Quasi-Newton method. It uses a second degree Taylor expansion as its
+model. It will choose its search direction based on the following
+three cases:
 \begin{enumerate}
 \item When the point suggested by Newton's method is within the trust
   region, this point is selected.
@@ -84,7 +85,10 @@ the following three cases:
 
 As can be seen, the possible directions is given by two joined lines
 (from $p_k$ to the Cauchy point and further to Newton's point). This
-gives a bending line (a ``dog leg'').
+gives a bending line (a ``dog leg''). Note that since the model
+function is quadratic, the Newton method will minimize it in a single
+iteration. So there is never a need to go further than the point found
+by Newton's method.
 
 Specifically, $p_k$ may take one of the following forms:
 \begin{enumerate}
@@ -97,25 +101,110 @@ Specifically, $p_k$ may take one of the following forms:
 Where $\Delta$ is the size of the trust region, $p^B$ is the point
 suggested by Newton's method and $p^U$ is the Cauchy point. The two
 latter points are defined as:
-\[ p^B = -B \cdot \nabla f (x_k) \]
-\[ p^C =  \]
+\[ p^B = -B^{-1} \cdot g \]
+\[ p^C = \frac{g' g}{g'Bg} \cdot g \]
 
+Where $g$ is the gradient in the point $x_k$, $B$ is an approximation
+of the Hessian and $B^{-1}$ is an approximation of its inverse; both
+$B$ and $B^{-1}$ are positive definite matrices.
 
-
-Where $B$ is an approximation of the Hessian; a positive definite
-matrix.
-
+There is one detail in the algorithm yet to be discussed. That is what
+size to choose for $\lambda$ and how to adjust this
+dynamically. Generally, one should lower $\lambda$ when no decent
+direction is found and only raise $\lambda$ when the step taken is as
+long as $\lambda$. In the implementation this is achieved by comparing
+the actual improvement in the objective function with that of the
+model (the expected improvement).
 
 
 \section{Verification}
+The implementation provided contains an odd bug. Apparently, the
+following expression becomes negative:
+\[ \frac{g'g}{g'B g} \]
+
+Because of this, the Cauchy point is computed to be in the opposite
+direction of $-g$, hence in a non-decending direction.
+
+I have failed to figure out why this bug occurs. All I can say is,
+that it is periodically and that it affects the results presented in
+this section. The fix is quick and dirty. I have used the ``abs''
+function to ensure non-negativity of ``B''.
+
+In the following I present and discuss my experimental results.
+
+\begin{center}
+\includegraphics[width=\textwidth]{images/graph0.pdf}
+\end{center}
+
+This first problem is solved effeciently by all methods. Apparently
+not much of a challenge, but a nice test to see that something does in
+fact work; despite the bug. The number of iterations are too few to
+say anything useful, except that the Dog-Leg method does not perform
+significantly worse than the others.
+
+
+\begin{center}
+\includegraphics[width=\textwidth]{images/graph1.pdf}
+\end{center}
+
+Here Newton's method alone fails to find the point, while Dog-Leg that
+is a combination of a Quasi-Newton method and the steepest descent
+finds a solution in just 4 iterations. Levenberg Marquardt is even
+faster with just two iterations.
+
+
+\begin{center}
+\includegraphics[width=\textwidth]{images/graph3.pdf}
+\end{center}
+
+Here is an interesting plot. While Newton's method is simple off
+course, Levenberg-Marquardt and BFGS spends all 50 iterations finding
+a solution. Dog-Leg uses 6. This suggests that Dog-Leg is more stabile
+than the other methods. It uses very few iterations to reach the goal
+even as the problems vary. It seems to be a very good all-round
+method.
+
+\begin{center}
+\includegraphics[width=\textwidth]{images/graph5.pdf}
+\end{center}
+As a final experiment I increase the number of angles to 10. Here it
+is clear that the newly implemented Dog-Leg wins. In just 15
+iterations it has a path to the goal. The other three methods use all
+50 iterations and even though Newton's method is close, it's result is
+clearly worse than that of Dog-Leg.
+
 
 
 \section{Conclusion}
+I have described and implemented the Dog-Leg method, though some
+irritating bug has crawled into the code. This has stolen a
+significant amount of my time (tracing and fixing) resulting in less
+experimentation with the method as I had wanted.
 
-\section{Implementation}
+Also, the applied fix affects the chosen direction in a way that may
+render the results presented in the verification section invalid.
+
+However, despite all this, the implemented method is extremely fast in
+the tested problems and uses just a few iterations, even when the
+other methods are in trouble. So, not just does it avoid calculation
+of the hessian and inverses - hence, has fast iterations - it will
+also find the solution in less iterations. It's simply too good to be
+true. I know where I will put my money :-)
+
+The method may work differently, when correctly implemented.
+
+
+
+\section{Source Code}
 This section contains the MatLab code for the BFGS implementation. I
 also updated the source code for the other two methods slightly,
 however I considered the changes too small to include here.
+
+\subsection{Run}
+\verbatiminput{../code/run.m}
+
+\subsection{Plotit}
+\verbatiminput{../code/plotit.m}
 
 \subsection{DogLeg Method}
 \verbatiminput{../code/dogleg.m}

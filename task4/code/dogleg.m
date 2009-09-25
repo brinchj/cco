@@ -28,7 +28,7 @@ function [ reserr angles ] = dogleg( goal, t, angles )
 
         % Newton and Cauchy points
         pB = - Bi * g;
-        pU = - ((g'*g) / (g' * B * g)) * g;
+        pU = - ((g'*g) / (g' * abs(B) * g)) * g;
 
         g'*B*g
         ((g'*g) / (g' * B * g))
