@@ -32,183 +32,211 @@
 \newpage
 
 \section{Introduction}
-The goal of this assignment was to implement the DogLeg method and
-compare this to the two methods implemented so far.
+In this week assignment, the optimization problem is expanded with
+equality and inequality contains. The goal is the implement at
+modified version of one of the previous optimization methods, that can
+handle these new constraints.
 
-\section{Trust Region Methods}
-As we have seen in earlier studies of optimization methods an easy to
-compute decent direction can be found in the inverse direction of the
-gradient, that being $-g$. However, using this direction does not come
-without complications. First, the direction is only guaranteed to
-decent within some $\epsilon$ of the original point. Secondly, even if
-one finds an $\epsilon$ that yields the greatest decent in the
-objective function and follows this to what is known as the Cauchy
-point, the method can still be slow; zigzagging its way to a local
+
+\section{Constrained Optimization}
+The unconstrained optimization problem is formalized as:
+\[
+\min f(x)
+\]
+Where $x$ is free to take any value in $\mathbb{R}^n$.
+
+By introducing equality and inequality constrains, this problem is
+expanded to:
+\begin{center}\begin{tabular}{rll}
+min & $f(x)$ & \\
+subject to & $c_i(x) = 0$    & for $i \in E$\\
+           & $c_i(x) \geq 0$ & for $i \in I$
+\end{tabular}\end{center}
+
+Where $E$ is the set of equality constraint indexes, while $I$ is the
+set of inequality constraint indexes. $c_i(x)$ is the $i$th
+constraint applied to vector $x$.
+
+It is possible to solve an optimization problem with only equality
+constraints, by approximating $f(x)$ with the lagrangian
+$L(x,\lambda)$. This yields a quadratic function which can be
+solved by finding $x^*$ and $\lambda^*$ that fulfills the
+Karush-Kuhn-Tucker conditions, which are necessary conditions for a
 minimum.
 
-An alternative search direction is Newton's direction. As many other
-line search methods it uses a search direction described by:
-\[ p_k = -B^{-1} \nabla f(x_k) \]
 
-Both of these methods are line search methods. They compute a decent
-direction and then decides on an appropriate step size. The method
-investigated in this assignment is known as a trust region method. Put
-shortly, it decides on a step size and then compute the a decent
-direction within the step size (the ``region'').
+\section{Active Set Methods}
+Active set methods is a way of solving problems with inequality
+constraints by transforming them into problems with equality
+constraints only.
 
-The idea is to use a model function $m$ that approximates the
-objective function $f$. Knowing the step size $\lambda$, the goal is
-to find the best search direction in the model function (which is easy
-to minimize) and then follow this direction in $f$. Of cause one needs
-to verify that the model is in fact precise enough to yield a decent
-in $f$. If not, the $\lambda$ is lowered. $\lambda$ is a measure for
-the precision of the model function. The region containing points with
-a distance lower than $\lambda$ away from $x_k$ is called the
-``trust'' region.
+Consider again problems the general constrained optimization problem:
+\begin{center}\begin{tabular}{rll}
+min & $f(x)$ & \\
+subject to & $c_i(x) = 0$    & for $i \in E$\\
+           & $c_i(x) \geq 0$ & for $i \in I$
+\end{tabular}\end{center}
+
+The idea of active set methods is to only consider inequality
+constraints that are being violated - the active
+constraints. When an inequality constraint is active, it is
+represented by an equality constrained forcing its value to zero. This
+is formalized as:
+\begin{center}\begin{tabular}{rll}
+min & $f(x)$ & \\
+subject to & $c_i(x) = 0$    & for $i \in E$\\
+           & $c_i(x) = 0$ & for $i \in W_k$
+\end{tabular}\end{center}
+Where $W_k$ are the active inequality constraints in the $k$th
+iteration.
+
+One of the simpler ways to keep track of active and nonactive
+inequality constraints, is to simply add a constraint to the active
+set whenever it is violated. When the chosen direction is going to
+violate constraint $j$ we enforce it. This will make the approximation
+follow the constraint border.
+
+Whenever an inequality constraint is not violated it is not part of
+the active set. There is no reason to enforce a constraint that is far
+away. Intuitively, this approach can be thought of as letting the
+optimization loose until it brakes the rules. When a rule is broken we
+enforce it.
 
 
-\section{Dog-Leg Method}
-The Dog-Leg method is based on a combination of the Cauchy point and a
-Quasi-Newton method. It uses a second degree Taylor expansion as its
-model. It will choose its search direction based on the following
-three cases:
-\begin{enumerate}
-\item When the point suggested by Newton's method is within the trust
-  region, this point is selected.
-\item If this is not the case and the trust region requests a smaller
-  step than that of the Cauchy point, the direction towards this point
-  is followed as far as the region permits.
-\item In the third case, when the region boundary is between the
-  Cauchy point and the Newton point, the intersection between the
-  limiting boundary and the line between these two points are chosen.
-\end{enumerate}
+\section{Gradient-Project Method}
+In the specific problem of this weeks programming case, we are to
+implement upper and lower bounds on the angles between each arm. This
+specific inequality constraint has the interesting property that it
+can be tested on each angle individually. It categorizes as a ``box''
+constraint.
 
-As can be seen, the possible directions is given by two joined lines
-(from $p_k$ to the Cauchy point and further to Newton's point). This
-gives a bending line (a ``dog leg''). Note that since the model
-function is quadratic, the Newton method will minimize it in a single
-iteration. So there is never a need to go further than the point found
-by Newton's method.
+The Gradient-Project method specializes in precisely this kind of
+constraints. The method uses the negative gradient $-g$ as its
+direction (just as the gradient descent). If one or more constraints
+are violated, the direction vector is projected onto one or more
+constraint lines, to ease the constraints; the violated constraints
+are added to the active set and enforced. Since this changes the
+direction of the step, it is necessary to test whether a better
+objective value is found in the new point. If not, the point is
+rejected and the step size lowered. If so, the point is accepted and a
+new iteration begins.
 
-Specifically, $p_k$ may take one of the following forms:
-\begin{enumerate}
-\item \[ p_{k+1} = p^B \]
-\item \[ p_{k+1} = \frac{\Delta}{\mid p^U\mid}  p^U \]
-\item \[ p_{k+1} = p^U + \frac{\Delta - \mid p^U\mid}{
-    \mid p^B\mid + 2p^{U\prime} p^B} p^B \]
-\end{enumerate}
+Assuming that the first point is located in the feasible region, the
+method will always be able to find a better objective value inside the
+feasible region. There must exist some step size small enough to yield
+a point inside the feasible region together with a better objective
+value. The last fact is due to the use of the negative gradient as
+direction.
 
-Where $\Delta$ is the size of the trust region, $p^B$ is the point
-suggested by Newton's method and $p^U$ is the Cauchy point. The two
-latter points are defined as:
-\[ p^B = -B^{-1} \cdot g \]
-\[ p^C = \frac{g' g}{g'Bg} \cdot g \]
+In the implementation, any starting point outside the feasible region
+will be moved inside the region if no feasible point is found in the
+search direction.
 
-Where $g$ is the gradient in the point $x_k$, $B$ is an approximation
-of the Hessian and $B^{-1}$ is an approximation of its inverse; both
-$B$ and $B^{-1}$ are positive definite matrices.
-
-There is one detail in the algorithm yet to be discussed. That is what
-size to choose for $\lambda$ and how to adjust this
-dynamically. Generally, one should lower $\lambda$ when no decent
-direction is found and only raise $\lambda$ when the step taken is as
-long as $\lambda$. In the implementation this is achieved by comparing
-the actual improvement in the objective function with that of the
-model (the expected improvement).
+The process of projection is implemented using $\max$ and $\min$
+functions on each angle individually. This restricts each angles to be
+within the given interval. The angles are normalized to the interval
+$[-\pi; \pi]$, before the constraints are enforced. Without
+normalization many of the angles will hit either the upper or lower
+bound, even though they are in fact inside the interval.
 
 
 \section{Verification}
-The implementation provided contains an odd bug. Apparently, the
-following expression becomes negative:
-\[ \frac{g'g}{g'B g} \]
+Verification has been performed using 20 angles. I have chosen to
+increase the number of angles, because it makes it more clear how the
+constraints effects the solution.
 
-Because of this, the Cauchy point is computed to be in the opposite
-direction of $-g$, hence in a non-decending direction.
+Instead of making several plots, I have made four movies with 75
+frames each. I can recommend watching these with a player that
+supports control over the movie speed (frame per second). The
+following mplayer invocation works very well:
+\begin{verbatim}
+mplayer -fps 1 themovie.mpg
+\end{verbatim}
 
-I have failed to figure out why this bug occurs. All I can say is,
-that it is periodically and that it affects the results presented in
-this section. The fix is quick and dirty. I have used the ``abs''
-function to ensure non-negativity of ``B''.
+All movies shows the same optimization problem, but under different
+conditions. In each movie, the constraints on the angles are adjusted
+between each frame by the following term:
+\[ -\frac{\pi}{i} \leq \theta \leq \frac{\pi}{i} \]
 
-In the following I present and discuss my experimental results.
+Where $i$ is the current frame. Hence, the angles are squeezed from
+the full circle interval $[-\pi; \pi]$ to $[-\pi/75; \pi/75]$.
 
-\begin{center}
-\includegraphics[width=\textwidth]{images/graph0.pdf}
-\end{center}
+Due to technical problems, the movies are malformed. The scale is
+wrong. They look flat, but are in fact $[-12; 2]$ in the $x$ axis and
+$[0 12]$ in the $y$ axis. Due to another technical problem, no axis
+are shown in the movies.
 
-This first problem is solved effeciently by all methods. Apparently
-not much of a challenge, but a nice test to see that something does in
-fact work; despite the bug. The number of iterations are too few to
-say anything useful, except that the Dog-Leg method does not perform
-significantly worse than the others.
-
-
-\begin{center}
-\includegraphics[width=\textwidth]{images/graph1.pdf}
-\end{center}
-
-Here Newton's method alone fails to find the point, while Dog-Leg that
-is a combination of a Quasi-Newton method and the steepest descent
-finds a solution in just 4 iterations. Levenberg Marquardt is even
-faster with just two iterations.
-
-
-\begin{center}
-\includegraphics[width=\textwidth]{images/graph3.pdf}
-\end{center}
-
-Here is an interesting plot. While Newton's method is simple off
-course, Levenberg-Marquardt and BFGS spends all 50 iterations finding
-a solution. Dog-Leg uses 6. This suggests that Dog-Leg is more stabile
-than the other methods. It uses very few iterations to reach the goal
-even as the problems vary. It seems to be a very good all-round
-method.
-
-\begin{center}
-\includegraphics[width=\textwidth]{images/graph5.pdf}
-\end{center}
-As a final experiment I increase the number of angles to 10. Here it
-is clear that the newly implemented Dog-Leg wins. In just 15
-iterations it has a path to the goal. The other three methods use all
-50 iterations and even though Newton's method is close, it's result is
-clearly worse than that of Dog-Leg.
+In the movies, the goal is not always reached. I can find two possible
+reasons for this:
+\begin{enumerate}
+\item The number of iterations are too low. I run each approximation
+  in at most 200 iterations. If the initial guess is too far from the
+  goal this could lead to a result far from the goal.
+\item The unconstrained optimization runs directly into a constraint
+  line without changing direction (step size equals zero).
+\end{enumerate}
 
 
+\subsection{Movie 1 - zero free angles}
+In this movie all angles are affected by the constraints equally and
+hence, none of them can be chosen freely.
+
+The interesting part in this movie is to see how the arm bends while
+the constraints tightens in. In the end the angles are too small for
+the arm to reach the goal. Instead it shoots over, as is seen in the
+following image:
+\includegraphics[width=\textwidth]{images/movie1.pdf}
+
+\subsection{Movie 2 - one free angle}
+In this movie angle number 10 is unaffected of the constraints and can
+therefore be chosen freely.
+
+Here, the interesting part is to see how the optimization exploits
+this in its attempt to reach the goal.
+
+An example of such a ``crack'' is clearly visible in the image below:\\
+\includegraphics[width=\textwidth]{images/movie2.pdf}
+
+\subsection{Movie 3 - two free angles}
+In this movie angles number 5 and 10 are unaffected of the constraints
+and can hence be chosen freely.
+
+Here, the interesting part is to see how these two free angles can be
+used in cooperation to find a path to the goal.
+
+An example of both angles being used in a ``free'' matter is shown
+below:\\
+\includegraphics[width=\textwidth]{images/movie3.pdf}
+
+\subsection{Movie 4 - three free angles}
+In this movie angles number 5, 10 and 15 are unconstrained.  This
+allows for three possible ``cracks''. An example of such three
+``crakcs'' are shown here:\\
+
+\includegraphics[width=\textwidth]{images/movie4.pdf}
 
 \section{Conclusion}
-I have described and implemented the Dog-Leg method, though some
-irritating bug has crawled into the code. This has stolen a
-significant amount of my time (tracing and fixing) resulting in less
-experimentation with the method as I had wanted.
+I have implemented and described the Gradient-Project method and shown
+how different inequality constraints affects the solutions found. Both
+with wide angles moving to small angles and with several free angles.
 
-Also, the applied fix affects the chosen direction in a way that may
-render the results presented in the verification section invalid.
-
-However, despite all this, the implemented method is extremely fast in
-the tested problems and uses just a few iterations, even when the
-other methods are in trouble. So, not just does it avoid calculation
-of the hessian and inverses - hence, has fast iterations - it will
-also find the solution in less iterations. It's simply too good to be
-true. I know where I will put my money :-)
-
-The method may work differently, when correctly implemented.
-
+Unfortunately the Gradient-Project method only works on ``box''
+constraints, where each constraint can be tested against each variable
+individually.
 
 
 \section{Source Code}
-This section contains the MatLab code for the BFGS implementation. I
-also updated the source code for the other two methods slightly,
-however I considered the changes too small to include here.
+This section contains the MatLab code for the Gradient-Projection
+implementation. I have also added a function for generating movies.
 
-\subsection{Run}
-\verbatiminput{../code/run.m}
+\subsection{Gproject}
+\verbatiminput{../code/gproject.m}
 
-\subsection{Plotit}
-\verbatiminput{../code/plotit.m}
+\subsection{Gproject Backtrack}
+\verbatiminput{../code/gproject_backtrack.m}
 
-\subsection{DogLeg Method}
-\verbatiminput{../code/dogleg.m}
-
+\subsection{Gproject Movie}
+\verbatiminput{../code/gproject_movie.m}
 
 \end{document}
 

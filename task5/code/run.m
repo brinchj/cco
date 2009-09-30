@@ -3,7 +3,7 @@ close all;
 clear all;
 
 % Setup a default configuration
-num_angles = 8;
+num_angles = 15;
 t      = [ zeros(1,num_angles); ones(1,num_angles) ];
 angles = ones(num_angles,1) * pi/4;
 
@@ -36,16 +36,21 @@ points = [
 ];
 
 
-for i = 1:length(points)
+for i = 1:1 %length(points)
     fig = figure(i);
 
     x = points(i,1);
     y = points(i,2);
 
-    plotit('Nonlinear Newton',    @nonlinear_newton,    t, x, y, angles, 0, 2);
-    %plotit('Levenberg Marquardt', @levenberg_marquardt, t, x, y, angles, 0, 4);
-    %plotit('BFGS',                @bfgs,                t, x, y, angles, 1, 4);
-    %plotit('DogLeg',              @dogleg,              t, x, y, angles, 2, 4);
-    plotit('Gradient Project',    @gproject,            t, x, y, angles, 1, 2);
+    plotit('Nonlinear Newton',    @nonlinear_newton,    ...
+           t, x, y, angles, 0, 2);
+    plotit('Levenberg Marquardt', @levenberg_marquardt, ...
+           t, x, y, angles, 0, 4);
+    plotit('BFGS',                @bfgs,                ...
+           t, x, y, angles, 1, 4);
+    plotit('DogLeg',              @dogleg,              ...
+           t, x, y, angles, 2, 4);
+    plotit('Gradient Project',    @gproject,            ...
+           t, x, y, angles, 0, 1);
 end
 %saveas(fig, 'graph.eps', 'eps2c');
