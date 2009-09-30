@@ -1,8 +1,7 @@
 function [ reserr angles ] = dogleg( goal, t, angles )
 
     % Initial configuration
-    c_delta = 0.5
-    delta   = 0.5
+    delta   = 0.5;
 
     % Compute first endpoint
     ep = f(t, angles);
@@ -16,26 +15,21 @@ function [ reserr angles ] = dogleg( goal, t, angles )
     Bi = eye(size(J, 2));
 
     % Init Error Variables
-    reserr = [];
+    reserr = zeros(50, 1);
     error  = dot(ep-goal,ep-goal);
 
     % Iteration Counter
     count = 0;
-    q = 1;
+
     % Approximation local minimum
     while dot(g,g) > 0.01 && count < 50
-        count = count + 1
+        count = count + 1;
 
         % Newton and Cauchy points
         pB = - Bi * g;
         pU = - ((g'*g) / (g' * abs(B) * g)) * g;
 
-        g'*B*g
-        ((g'*g) / (g' * B * g))
-        assert((g'*g) / (g'*B*g) >= 0)
-
         % Compute direction vector
-        p = zeros(length(angles));
         if norm(pB) <= delta
             p = pB;
         elseif norm(pU) >= delta
@@ -56,8 +50,6 @@ function [ reserr angles ] = dogleg( goal, t, angles )
 
         % Expected error
         newExpError = error + g' * p + .5 * p' * B * p;
-        error = error
-        newExpError = newExpError
 
         % Compare new error with previous
         q = (error - newError) / (error - newExpError);
@@ -66,11 +58,12 @@ function [ reserr angles ] = dogleg( goal, t, angles )
             delta = 0.25 * norm(p);
         else
             if q > 0.75 && norm(p) == delta
-                delta = min(2*delta, 2)
+                delta = min(2*delta, 2);
             end
         end
         if q < 0
             % REJECT
+            reserr(count) = error;
             continue;
         end
 
@@ -78,7 +71,7 @@ function [ reserr angles ] = dogleg( goal, t, angles )
         newJ = jacobian(t, newAngles);
         y  = newJ'*(newEp-goal) - g;
         vA = (y * y') / (y' * p);
-        vB = (B*p * p'*B) / (p' * B * p);
+        vB = (B*p)*(p'*B) / (p' * B * p);
         B = B + vA - vB;
         B = abs(B);
 
@@ -91,13 +84,9 @@ function [ reserr angles ] = dogleg( goal, t, angles )
         g  = newJ' * (newEp - goal);
 
         % Update State
-        J  = newJ;
-        ep = newEp;
         angles = newAngles;
         error = newError;
 
-        reserr = [ reserr error ];
+        reserr(count) = error;
     end
-    error
-    dot(g,g)
 end

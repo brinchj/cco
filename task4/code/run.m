@@ -3,9 +3,9 @@ close all;
 clear all;
 
 % Setup a default configuration
-num_angles = 10;
+num_angles = 100;
 t      = [ zeros(1,num_angles); ones(1,num_angles) ];
-angles = [ ones(num_angles,1) * pi/4 ];
+angles = ones(num_angles,1) * pi/4;
 
 % Try to find end-effector position
 e = f(t, angles);
@@ -25,12 +25,14 @@ y = e(2);
 
 
 % points to test
+a = num_angles;
 points = [
-%.6501 -.5502;
-%    1.5 1;
-%    -0.1011 -1.2345;
-%    -1 -3               % outside reach
-    5.221 -7.11
+    -0.5*a 0.29*a
+    %.6501*a -.5502*a
+    %0.16*a 0.33*a
+    %-0.0331*a -0.4115*a;
+    %-0.33*a -1*a;           % outside reach
+    %0.221*a -0.90*a
 ];
 
 
