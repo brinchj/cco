@@ -1,0 +1,8 @@
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%\selectlanguage{danish}
+
+\lstset{language=Python,basicstyle=\small,
+  columns=fullflexible}
+
