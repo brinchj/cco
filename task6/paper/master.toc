@@ -1,0 +1,18 @@
+\select@language {english}
+\contentsline {chapter}{Contents}{i}{section*.1}
+\contentsline {section}{Introduction}{ii}{section*.2}
+\contentsline {section}{Linear Complimentary Problems}{ii}{section*.3}
+\contentsline {section}{Splitting Method}{ii}{section*.4}
+\contentsline {paragraph}{Case 1: }{iii}{section*.5}
+\contentsline {paragraph}{Case 2:}{iii}{section*.6}
+\contentsline {subsection}{Error Measure}{iii}{section*.7}
+\contentsline {section}{Relation to Quadratic Problems}{iv}{section*.8}
+\contentsline {subsection}{Algebraic Transformation from LCP to QP}{iv}{section*.9}
+\contentsline {section}{Convergence Rate}{v}{section*.10}
+\contentsline {section}{Verification}{v}{section*.11}
+\contentsline {subsection}{Movie 1 - Falling Balls}{v}{section*.12}
+\contentsline {section}{Conclusion}{v}{section*.13}
+\contentsline {section}{Source Code}{v}{section*.14}
+\contentsline {subsection}{Run}{v}{section*.15}
+\contentsline {subsection}{Integrate}{vi}{section*.16}
+\contentsline {subsection}{Solve LCP}{vii}{section*.17}

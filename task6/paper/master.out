@@ -1,0 +1,15 @@
+\BOOKMARK [0][-]{section*.1}{Contents}{}
+\BOOKMARK [1][-]{section*.2}{Introduction}{section*.1}
+\BOOKMARK [1][-]{section*.3}{Linear Complimentary Problems}{section*.1}
+\BOOKMARK [1][-]{section*.4}{Splitting Method}{section*.1}
+\BOOKMARK [2][-]{section*.7}{Error Measure}{section*.4}
+\BOOKMARK [1][-]{section*.8}{Relation to Quadratic Problems}{section*.1}
+\BOOKMARK [2][-]{section*.9}{Algebraic Transformation from LCP to QP}{section*.8}
+\BOOKMARK [1][-]{section*.10}{Convergence Rate}{section*.1}
+\BOOKMARK [1][-]{section*.11}{Verification}{section*.1}
+\BOOKMARK [2][-]{section*.12}{Movie 1 - Falling Balls}{section*.11}
+\BOOKMARK [1][-]{section*.13}{Conclusion}{section*.1}
+\BOOKMARK [1][-]{section*.14}{Source Code}{section*.1}
+\BOOKMARK [2][-]{section*.15}{Run}{section*.14}
+\BOOKMARK [2][-]{section*.16}{Integrate}{section*.14}
+\BOOKMARK [2][-]{section*.17}{Solve LCP}{section*.14}

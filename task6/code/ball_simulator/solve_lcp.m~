@@ -1,0 +1,69 @@
+function lambda = solve_lcp(A, b, lambda)
+% SOLVE_LCP - Solve the LCP problem
+% input:
+%    A    - A square symmetric positive (semi) definite matrix.
+%    b    - The ``right-hand-side'' vector.
+%  lambda - Initial guess of the solution.
+%
+% output:
+%
+%  lambda -  The resulting solution computed by the function.
+%
+% Copyright 2009, Kenny Erleben, DIKU:
+
+
+% To do implmenent the LCP solver right here!!!
+
+% Pseudo Code:
+% While not converged
+%  lambda = max(0, -inv( L+D)*(U*lambda + b)
+%  residual = min(A*lambda+b,lambda)
+%  error = residual'*residual
+% End
+    fprintf(1, 'SOLVE:\n');
+
+        
+    if (size(lambda, 1) < size(A, 1))
+        lambda = [ lambda; zeros(size(A, 1) - size(lambda,1), 1) ];
+    elseif (size(lambda, 1) > size(A, 1))
+        lambda = lambda(1:size(A,1));
+    end
+    
+    
+    residual = min(A*lambda + b, lambda);
+    error = residual' * residual;
+
+    fprintf(1, 'Error: %d\n', error);
+
+    M = tril(A) + diag(diag(A));
+    N = M - A;
+    assert (all(all(A == (M-N))));
+    
+    Mi = inv(M);
+    
+    count = 1;
+    while error > 0.00001 && count < 20000
+        %lambda = lambda
+        newLambda   = max(0, inv(M)*(N*lambda - b));
+        %if all(newLambda == lambda)
+        %    newLambda = newLambda + 0.1;
+        %end
+        lambda = newLambda;
+        residual = min(A*lambda + b, lambda);
+        newError = residual' * residual;
+        if not (error > newError)
+            error = newError;
+            break
+        end
+        error = newError;
+        fprintf(1, 'Error: %d -> %d\n', count, error);
+        count    = count + 1;
+    end
+    
+    fprintf(1, 'Error: %d\n', error);
+    if error > 1
+        %A
+        %assert (1 == 0);
+    end
+
+end

@@ -1,0 +1,32 @@
+close all;
+clear all;
+config = setup_config( 500, 300, 300, 10 );
+
+
+lambda = 1; 
+
+iters = 100;
+
+M = moviein(iters);
+fig = figure(1);
+
+%set(fig, 'Renderer', 'OpenGL');
+
+for i=1:iters
+    info   = collision_detection(config);
+    [config lambda] = integrate(config, info, 0.015, lambda);
+
+    if mod(i, 4) == 0
+        clf;
+        hold on;    
+        draw_config( config );
+        draw_info( config, info );
+        hold off;
+        axis square;
+        figure(fig);
+        
+        %M(:,i) = getframe();
+    end
+end
+
+%mpgwrite(M, jet, 'movie.mpg');
