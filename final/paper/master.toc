@@ -11,7 +11,7 @@
 \contentsline {subsection}{Armijo Back-tracking}{iii}{section*.10}
 \contentsline {section}{Problem 4: Trust Region Methods}{iv}{section*.11}
 \contentsline {subsection}{Levenberg-Marquardt}{iv}{section*.12}
-\contentsline {subsection}{Dogleg}{iv}{section*.13}
+\contentsline {subsection}{Dogleg}{v}{section*.13}
 \contentsline {section}{Problem 5: First Order Optimality Conditions}{vi}{section*.14}
 \contentsline {section}{Problem 6: Calculus of Variation}{vii}{section*.15}
 \contentsline {section}{Problem 7: Linear Complementary Problem}{vii}{section*.16}
@@ -22,4 +22,5 @@
 \contentsline {paragraph}{Case 2:}{x}{section*.21}
 \contentsline {section}{Problem 9: Reformulation}{x}{section*.22}
 \contentsline {section}{Problem 11: Problem Modeling}{x}{section*.23}
-\contentsline {section}{Absense}{xi}{section*.24}
+\contentsline {section}{Problem 12: Comparison of Splittings}{xi}{section*.24}
+\contentsline {section}{Notes on Absense}{xi}{section*.25}

@@ -37,7 +37,8 @@
 \newpage
 
 \section{Introduction}
-
+This is my final hand in for the course ``Constraint Continuous
+Optimization''. I hope you will enjoy it :-)
 
 \section{Problem 1: Mandatory}
 I have filled out the Course Evaluation.
@@ -543,8 +544,44 @@ ax+b$ in 2-dimensions), but it is a simple example in a series of
 complex optimization problems.
 
 
+\section{Problem 12: Comparison of Splittings}
 
-\section{Absense}
+Sorry about no units! It is number of iterations ($\log$) by iteration
+number. The plots and discussion are on the last page (no time to fix
+it) $\ldots$
+
+\begin{figure}[h!]
+\caption{Jacobi}
+\includegraphics[width=\textwidth]{images/jacobi.pdf}\\
+As can be seen the Jacobi splitting stays below $10^2$, which is quite
+nice.
+\end{figure}
+
+\begin{figure}[h]
+\caption{Gauss-Seidel}
+\includegraphics[width=\textwidth]{images/seidel.pdf}
+The Gauss-Seidel splitting variates a bit more than the Jacobi
+splitting, but looks good too.\end{figure}
+
+
+\begin{figure}[h]
+\caption{SOR with $\omega = 0.25$}
+\includegraphics[width=\textwidth]{images/sor_low.pdf}
+According to WikiPedia's text on the SOR splitting $\omega > 1$ should
+converge faster while $\omega < 1$ should be more robust. I wanted to
+test this so I chose $\omega = 0.25$ and $\omega = 1.75$. This plot of
+$0.25$ seems to use a lot of iterations in the last part of the
+simulation.
+\end{figure}
+
+\begin{figure}[h]
+\caption{SOR with $\omega = 1.75$}
+\includegraphics[width=\textwidth]{images/sor_high.pdf}
+Wow! This beats all the other splittings in performance. The number of
+iterations used are on average much lower than 100.
+\end{figure}
+
+\section{Notes on Absense}
 I have noted, that I have gained 1 absent mark. I do not recall being
 absent a full monday $\ldots$
 

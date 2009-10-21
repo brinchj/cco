@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2009.7.12)  21 OCT 2009 15:08
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2009.7.12)  21 OCT 2009 15:55
 entering extended mode
  %&-line parsing enabled.
 **master.tex
@@ -1065,14 +1065,14 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 LaTeX Font Info:    Font shape `OT1/pplj/bx/n' in size <12> not available
 (Font)              Font shape `OT1/pplj/b/n' tried instead on input line 39.
 LaTeX Font Info:    Font shape `OT1/pplj/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/pplj/b/n' tried instead on input line 47.
-LaTeX Font Info:    Try loading font information for U+fplmbb on input line 48.
+(Font)              Font shape `OT1/pplj/b/n' tried instead on input line 48.
+LaTeX Font Info:    Try loading font information for U+fplmbb on input line 49.
 
 
 (/usr/share/texmf-texlive/tex/latex/psnfss/ufplmbb.fd
 File: ufplmbb.fd 2003/10/30 Fontinst v1.914 font definitions for U/fplmbb.
 )
-Overfull \hbox (22.70792pt too wide) detected at line 58
+Overfull \hbox (22.70792pt too wide) detected at line 59
 \OML/zplm/m/it/10 f\OT1/zplm/m/n/10 (\OML/zplm/m/it/10 x\OT1/zplm/m/n/10 ) = \O
 ML/zplm/m/it/10 f\OT1/zplm/m/n/10 (\OT1/pplx/m/n/10 0\OT1/zplm/m/n/10 ) + \OML/
 zplm/m/it/10 xf[]\OT1/zplm/m/n/10 (\OT1/pplx/m/n/10 0\OT1/zplm/m/n/10 ) + []\OM
@@ -1081,32 +1081,58 @@ L/zplm/m/it/10 f[]\OT1/zplm/m/n/10 (\OT1/pplx/m/n/10 0\OT1/zplm/m/n/10 ) + [] +
 + [][] []
  []
 
-<images/armijo_plot.pdf, id=130, 449.68pt x 338.26375pt>
+LaTeX Font Info:    Font shape `OT1/pplj/m/sl' in size <10> not available
+(Font)              Font shape `OT1/pplj/m/it' tried instead on input line 86.
+[2] <images/armijo_plot.pdf, id=146, 449.68pt x 338.26375pt>
 File: images/armijo_plot.pdf Graphic file (type pdf)
 
-<use images/armijo_plot.pdf>
-LaTeX Font Info:    Font shape `OT1/pplj/m/sl' in size <10> not available
-(Font)              Font shape `OT1/pplj/m/it' tried instead on input line 99.
- [2] [3 <./images/armijo_plot.pdf>]
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 124.
+<use images/armijo_plot.pdf> [3 <./images/armijo_plot.pdf>]
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 125.
 
 
 (/usr/share/texmf-texlive/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) [4]
-Underfull \hbox (badness 10000) in paragraph at lines 230--231
+) [4] [5]
+Underfull \hbox (badness 10000) in paragraph at lines 231--232
 
  []
 
-[5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 318--320
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 319--321
 
  []
 
 [7] [8]
 LaTeX Font Info:    Font shape `OT1/pplj/bx/n' in size <10> not available
-(Font)              Font shape `OT1/pplj/b/n' tried instead on input line 463.
- [9] [10] [11]
+(Font)              Font shape `OT1/pplj/b/n' tried instead on input line 464.
+ [9] [10] <images/jacobi.pdf, id=191, 449.68pt x 338.26375pt>
+File: images/jacobi.pdf Graphic file (type pdf)
+
+<use images/jacobi.pdf>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<images/seidel.pdf, id=192, 449.68pt x 338.26375pt>
+File: images/seidel.pdf Graphic file (type pdf)
+ <use images/seidel.pdf>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/sor_low.pdf, id=193, 449.68pt x 338.26375pt>
+File: images/sor_low.pdf Graphic file (type pdf)
+ <use images/sor_low.pdf>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/sor_high.pdf, id=194, 449.68pt x 338.26375pt>
+File: images/sor_high.pdf Graphic file (type pdf)
+
+<use images/sor_high.pdf>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[11] [12 <./images/jacobi.pdf>] [13 <./images/seidel.pdf>] [14 <./images/sor_lo
+w.pdf>] [15 <./images/sor_high.pdf>]
 
 Package FiXme Summary: Number of notes: 0,
 (FiXme)                Number of warnings: 0,
@@ -1119,13 +1145,13 @@ Package FiXme Summary: Number of notes: 0,
 
 (./master.aux) ) 
 Here is how much of TeX's memory you used:
- 10756 strings out of 95086
- 148310 string characters out of 1183255
+ 10786 strings out of 95086
+ 148809 string characters out of 1183255
  272682 words of memory out of 1500000
- 13556 multiletter control sequences out of 10000+50000
+ 13573 multiletter control sequences out of 10000+50000
  58449 words of font info for 200 fonts, out of 1200000 for 2000
  28 hyphenation exceptions out of 8191
- 35i,11n,43p,240b,395s stack positions out of 5000i,500n,6000p,200000b,5000s
+ 35i,11n,43p,240b,377s stack positions out of 5000i,500n,6000p,200000b,5000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/sha
 re/texmf-texlive/fonts/type1/bluesky/cm/cmex10.pfb></usr/share/texmf-texlive/fo
 nts/type1/bluesky/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/c
@@ -1138,9 +1164,9 @@ hare/texmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive
 /fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/
 palatino/uplr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/palatino/uplri8a.
 pfb>
-Output written on master.pdf (12 pages, 149859 bytes).
+Output written on master.pdf (16 pages, 165937 bytes).
 PDF statistics:
- 244 PDF objects out of 1000 (max. 8388607)
- 38 named destinations out of 1000 (max. 131072)
- 50886 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 291 PDF objects out of 1000 (max. 8388607)
+ 47 named destinations out of 1000 (max. 131072)
+ 50914 words of extra memory for PDF output out of 51595 (max. 10000000)
 
