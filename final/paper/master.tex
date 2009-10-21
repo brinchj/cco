@@ -234,34 +234,173 @@ subject to: & $c(x) \geq 0$
 \end{tabular}\end{center}
 
 Where $x \in R^n$, $c$ are the constraints and $f : \mathbb{R}^n
-\rightarrow \mathbb{R}^n$.
+\to \mathbb{R}^n$.
 
 I will now derive the KKS conditions for this minimization problem.
 Let us first examine the first-order Taylor expansion of the objective
 and constraint function. To maintain feasibility we require that
 $c(x+d)=0$, where $d$ is the direction. Hence,
-\[ 0 = c(x+d) \approx c(x) + \nabla c(x)^T d = c(x)^Td \]
+\[ 0 \leq c(x+d) \approx c(x) + \nabla c(x)^T d = c(x)^Td \]
 The last step is due to $c(x) = 0$. When this condition is satisfied,
 we maintain feasibility after the step in direction $d$.
 
 To ensure an improvement in the objective function, we seek to satisfy
 the condition:
 \[ 0 > f(x + d) - f(x) \approx \nabla f(x)^T d\]
-That is the objective value should drop when moving in the direction
-of $d$ (a descent direction was chosen).
+
+That is, the objective value should drop when moving in the direction
+of $d$ (a descent direction). This is called an improvement to first
+order.
+
+Consider the direction $d$ pointing towards a constraint boundary. In
+such a case, where the optimal solution is bounded by one or more
+constraints, the gradient of $f$ and that of $c$ must be
+parrallel. Hence,
+\[ \nabla f(x) = \lambda \nabla c(x),\ \lambda > 0\]
+
+When the descent direction is not restricted by any constraints,
+normal optimization techniques can be used. Note however, that the
+minimzer may lie far from any constrainting boundary that $d$ is
+trying to cross.
 
 
+Considor now the Lagrangian function:
+\[ \Lambda (x, \lambda) = f(x) - \lambda c(x) \]
 
-Let $x^\star$ be a local minimizer of $f$. Then there exists a
-Lagrange multiplier $\lambda^\star$ such that the KKS conditions are
-met:
-\[\nabla_x L(x^\star, \lambda^\star) = 0\]
-\[c_i(x^\star) = 0\]
-\[c_i(x^\star) \geq 0\]
-\[\lambda^\star \geq 0\]
-\[\lambda^\star c_i(x^\star) = 0 \]
+And its derivate:
+\[ \nabla_x \Lambda(x, \lambda) = \nabla f(x) - \lambda \nabla
+c(x) \]
+
+It is clear that the condition of $\nabla f$ can be written as:
+\[ \nabla f(x) = \lambda \nabla c(x) \Rightarrow
+   \nabla_x \lambda(x, \lambda) = 0 \]
+
+This is interesting, since it shows a connection between stationary
+points in $\Lambda(x, \lambda)$ and possible minimizers in $f$.
+
+A necessary condition for a minimizer $x^\star$ of $f$ is then:
+\[ \nabla_x \Lambda(x^\star, \lambda^\star) = 0,\ \lambda^\star \geq
+0 \]
+
+Furthermore, we know that the constraints should be fulfilled:
+\[c(x^\star) \geq 0\]
+
+However, since this was derived from \textit{active} constraints
+(those that limit the search direction), we also require:
+\[ \lambda^\star c(x^\star) = 0 \]
+
+This condition ensures either $\lambda^\star$ or $c(x^\star)$ to be
+zero. The idea is, that whenever $c(x^\star) > 0$ (we are not near a
+constraint boundary) then $\lambda^\star = 0$ and the stationary point
+condition reduces to $\nabla f(x^\star) = 0$. On the other hand, having
+$c(x^\star) = 0$ allows $\lambda^\star$ to take a negative value.
+
+The Karush-Kuhn-Tucker conditions describe these conditions using sets
+$E$ and $I$, where $E$ contains all active constraints and $I$
+contains all inactive constraints:
+\begin{center}\begin{tabular}{rl}
+$ \nabla \Lambda(x^\star, \lambda^\star) = 0,$ & \\
+$  c_i(x^\star) = 0, $ & for all $i \in E,$ \\
+$  c_i(x^\star) \geq 0,$ & for all $i \in I,$ \\
+$ \lambda_i^\star \geq 0,$ & for all $i \in I$, \\
+$ \lambda_i^\star c_i(x^\star) = 0,$ & for all $i \in E \cup I$
+\end{tabular}\end{center}
 
 
+\section{Problem 6: Calculus of Variation}
+Given the functional:
+\[ S = \int_a^b \Lambda (x, f, f')\ dx\]
+The Euler-Lagrange equation becomes:
+\[ - \frac{d}{dx}\frac{\rho L}{\rho f'} + \frac{\rho L}{\rho f} = 0 \]
+
+
+\section{Problem 7: Linear Complementary Problem}
+A linear complimentary problem (LCP) is a specific category of
+problems, which take the form:\\
+
+\begin{center}\begin{tabular}{rl}
+$A\lambda + b$ & $\geq 0$ \\
+$\lambda$ & $\geq 0$\\
+$\lambda^T (A\lambda + b)$ & $= 0$
+\end{tabular}\end{center}
+
+Where $A$ is a given matrix, $b$ is a given vector and $\lambda$ is
+the solution vector that is to be found.
+
+
+\subsection{Connection to Constrained Optimization}
+Any LCP can be reformulated as a quadratic problem (QP). The QP
+corresponding to the LCP in the previous section becomes:
+\begin{center}\begin{tabular}{rrl}
+$\min_\lambda$ & $\lambda^T(A\lambda+b)$ & \\
+such that: & $A\lambda + b$ & $\geq 0$ \\
+           & $\lambda $ & $\geq 0$
+\end{tabular}\end{center}
+
+Since $z\geq 0$ and $Mz+q\geq 0$, the product $z^T(Mz+q)$ must be
+positive. Hence, the minimum must be $0$. The inequality constraints
+are still maintained, so the optimal solution will be equal to that of
+the original LPC.
+
+\subsection{Algebraic Transformation from LCP to QP}
+In this section I will convert the LCP solved in this weeks assignment
+to an QP. Let's start with the original LCP:
+\begin{center}\begin{tabular}{rl}
+$A\lambda + b$ & $\geq 0$ \\
+$\lambda$ & $\geq 0$\\
+$\lambda^T (A\lambda + b)$ & $= 0$
+\end{tabular}\end{center}
+
+Letting $h(\lambda) = A\lambda + b$, $x^\star = \lambda$ and $y^\star
+= h(\lambda)$ we obtain the following reformulation of the
+conditions:
+\begin{center}\begin{tabular}{rl}
+$h(\lambda)$ & $\geq 0$ \\
+$\lambda$ & $\geq 0$\\
+$\lambda^T h(\lambda)$ & $= 0$\\
+
+$(x^\star)^T h(\lambda)$&$= 0$
+\end{tabular}\end{center}
+
+The new conditions (last three) being repetitions of the original
+conditions (first three). Since $\min(\lambda, y^\star = A\lambda+b) =
+0$ (see Splitting Method, page \pageref{splitting}) we can add the
+constraint:
+\begin{center}\begin{tabular}{rl}
+    $(y^\star)^T \lambda $&$= 0$
+\end{tabular}\end{center}
+
+Furthermore, since $x = \lambda$ and $y^\star = h(x)$ the following
+constraint is valid:
+\[ h(\lambda) + \nabla h(\lambda)^T \lambda - \nabla h(\lambda)^T
+\lambda - h(\lambda) = 0 \Rightarrow\]
+\[ h(\lambda) + \nabla h(\lambda)^T \lambda - \nabla h(\lambda)^T
+x^\star - y^\star = 0 \]
+
+The full set of conditions is now:
+\begin{center}\begin{tabular}{rl}
+$h(\lambda)$ & $\geq 0$ \\
+$\lambda$ & $\geq 0$\\
+$\lambda^T h(\lambda)$ & $= 0$\\
+
+$(x^\star)^T h(\lambda)$&$= 0$ \\
+
+$(y^\star)^T \lambda $&$= 0$ \\
+
+$h(\lambda) + \nabla h(\lambda)^T \lambda - \nabla h(\lambda)^T
+x^\star - y^\star $&$= 0$
+\end{tabular}\end{center}
+
+Which are the first order optimality conditions for the QP
+\begin{center}\begin{tabular}{rrl}
+$\min_\lambda$ & $\lambda^T h(\lambda)$ & \\
+such that: & $h(\lambda)$ & $\geq 0$ \\
+           & $\lambda $ & $\geq 0$
+\end{tabular}\end{center}
+
+This transformation to QP shows that it is possible to solve LCP's
+using QP methods. An alternative way of showing this is to derive the
+KKT conditions from a QP and show that these reduce to an LCP.
 
 
 \section{Problem 8: Splitting Method}
@@ -343,11 +482,74 @@ In order to solve the LCP, one can approximate on $\lambda^\star$
 using above equation until an acceptable error has been reached.
 
 
-\section{Conclusion}
+\section{Problem 9: Reformulation}
+This problem reminds me of the tasks in Inverse Kinematics. Here we
+had a function $F : \mathbb{R}^n \to \mathbb{R}^m$, transforming
+$n$ angles into a point of $m$ dimensions. The goal was to minimize
+the distance to a specifif $m$-dimensional point $e$. A function $f :
+\mathbb{R}^n \to \mathbb{R}$ was defined by:
+\[ f(\theta) = (F(\theta) - e) \cdot (F(\theta) - e) \]
+
+That is, $f$ is a measure for the distance from the point given by the
+angles in $\theta$ to the wanted end point. The minization problem can
+now be formulated as:
+\begin{center}\begin{tabular}{rl}
+$\min_\theta$ & $f(\theta)$
+\end{tabular}\end{center}
+
+I believe this is an example of the transformation wanted in this task.
 
 
-\appendix
-\section{Source Code}
+\section{Problem 11: Problem Modeling}
+In this section, I will go through the problems solved during this
+course and how they were modelled in the world of optimization.
+
+The first framework we used was designed to solve Inverse Kinematics
+problems. In this case, the problem of finding $n$ angles that would
+make an arm reach a chosen point. An $F : \mathbb{R}^n \to
+\mathbb{R}^m$ function from angles to coordinates was given. The goal
+was now to find $\theta$ that would solve the non-linear equation
+$F(\theta) - e = 0$. Using this the objective function $f :
+\mathbb{R}^n \to \mathbb{R}$ was defined as the distance from the
+point reached through the found angles to the chosen end point
+$e$. The function $f$ could now be optimized using unconstained
+minimization methods.
+
+To make things more interesting, a few constraints was added to the
+problem. The angles in $\theta$ was limited to a fixed interval, hence
+adding inequality constaints of the form $l \leq \theta \leq u$. The
+model would have to ensure, that the found solution was inside this
+boundary. Fortunately, this was quite simple, due to the box-property
+of the inequality (the constraints form a ``box'' around the feasible
+region). I experimented with allowing some of the angles to be loose,
+by not enforcing the constraints on these, and with tightening the
+permitted range bit by bit. This was the inspiration for some very
+interesting animations.
+
+Hereafter, we moved on to physics simulation of bouncing balls. This
+was modelled mathematically with respect to the physical rules that
+were present in the simulation. The result was a linear
+complimentarity problem, that seeked to minimize the physical energy
+present in the system. Constraints were added whenever two balls
+collided and removed as soon as they were distanced again. Combined
+with rules of acceleration, this formed the basis for the simulation.
+
+Lately, we have looked at Calculus of Variations, where the functions
+plays the role part instead of $n$-dimensional vectors. An example of
+such an optimization problem is to find the function, who's
+function-line between points $a$ and $b$ travel the shortest
+distance. The optimal solution is of course a straight line ($f(x) =
+ax+b$ in 2-dimensions), but it is a simple example in a series of
+complex optimization problems.
+
+
+
+\section{Absense}
+I have noted, that I have gained 1 absent mark. I do not recall being
+absent a full monday $\ldots$
+
+
+
 \end{document}
 
 %%% Local Variables:

@@ -13,8 +13,13 @@
 \contentsline {subsection}{Levenberg-Marquardt}{iv}{section*.12}
 \contentsline {subsection}{Dogleg}{iv}{section*.13}
 \contentsline {section}{Problem 5: First Order Optimality Conditions}{vi}{section*.14}
-\contentsline {section}{Problem 8: Splitting Method}{vi}{section*.15}
-\contentsline {paragraph}{Case 1: }{vii}{section*.16}
-\contentsline {paragraph}{Case 2:}{vii}{section*.17}
-\contentsline {section}{Conclusion}{viii}{section*.18}
-\contentsline {section}{Source Code}{viii}{section*.19}
+\contentsline {section}{Problem 6: Calculus of Variation}{vii}{section*.15}
+\contentsline {section}{Problem 7: Linear Complementary Problem}{vii}{section*.16}
+\contentsline {subsection}{Connection to Constrained Optimization}{viii}{section*.17}
+\contentsline {subsection}{Algebraic Transformation from LCP to QP}{viii}{section*.18}
+\contentsline {section}{Problem 8: Splitting Method}{ix}{section*.19}
+\contentsline {paragraph}{Case 1: }{x}{section*.20}
+\contentsline {paragraph}{Case 2:}{x}{section*.21}
+\contentsline {section}{Problem 9: Reformulation}{x}{section*.22}
+\contentsline {section}{Problem 11: Problem Modeling}{x}{section*.23}
+\contentsline {section}{Absense}{xi}{section*.24}

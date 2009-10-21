@@ -12,6 +12,11 @@
 \BOOKMARK [2][-]{section*.12}{Levenberg-Marquardt}{section*.11}
 \BOOKMARK [2][-]{section*.13}{Dogleg}{section*.11}
 \BOOKMARK [1][-]{section*.14}{Problem 5: First Order Optimality Conditions}{section*.1}
-\BOOKMARK [1][-]{section*.15}{Problem 8: Splitting Method}{section*.1}
-\BOOKMARK [1][-]{section*.18}{Conclusion}{section*.1}
-\BOOKMARK [1][-]{section*.19}{Source Code}{section*.1}
+\BOOKMARK [1][-]{section*.15}{Problem 6: Calculus of Variation}{section*.1}
+\BOOKMARK [1][-]{section*.16}{Problem 7: Linear Complementary Problem}{section*.1}
+\BOOKMARK [2][-]{section*.17}{Connection to Constrained Optimization}{section*.16}
+\BOOKMARK [2][-]{section*.18}{Algebraic Transformation from LCP to QP}{section*.16}
+\BOOKMARK [1][-]{section*.19}{Problem 8: Splitting Method}{section*.1}
+\BOOKMARK [1][-]{section*.22}{Problem 9: Reformulation}{section*.1}
+\BOOKMARK [1][-]{section*.23}{Problem 11: Problem Modeling}{section*.1}
+\BOOKMARK [1][-]{section*.24}{Absense}{section*.1}

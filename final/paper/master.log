@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2009.7.12)  21 OCT 2009 12:15
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2009.7.12)  21 OCT 2009 15:08
 entering extended mode
  %&-line parsing enabled.
 **master.tex
@@ -1081,7 +1081,7 @@ L/zplm/m/it/10 f[]\OT1/zplm/m/n/10 (\OT1/pplx/m/n/10 0\OT1/zplm/m/n/10 ) + [] +
 + [][] []
  []
 
-<images/armijo_plot.pdf, id=105, 449.68pt x 338.26375pt>
+<images/armijo_plot.pdf, id=130, 449.68pt x 338.26375pt>
 File: images/armijo_plot.pdf Graphic file (type pdf)
 
 <use images/armijo_plot.pdf>
@@ -1099,9 +1099,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 230--231
  []
 
 [5] [6]
+Underfull \hbox (badness 10000) in paragraph at lines 318--320
+
+ []
+
+[7] [8]
 LaTeX Font Info:    Font shape `OT1/pplj/bx/n' in size <10> not available
-(Font)              Font shape `OT1/pplj/b/n' tried instead on input line 324.
- [7] [8]
+(Font)              Font shape `OT1/pplj/b/n' tried instead on input line 463.
+ [9] [10] [11]
 
 Package FiXme Summary: Number of notes: 0,
 (FiXme)                Number of warnings: 0,
@@ -1114,10 +1119,10 @@ Package FiXme Summary: Number of notes: 0,
 
 (./master.aux) ) 
 Here is how much of TeX's memory you used:
- 10743 strings out of 95086
- 148170 string characters out of 1183255
- 271682 words of memory out of 1500000
- 13551 multiletter control sequences out of 10000+50000
+ 10756 strings out of 95086
+ 148310 string characters out of 1183255
+ 272682 words of memory out of 1500000
+ 13556 multiletter control sequences out of 10000+50000
  58449 words of font info for 200 fonts, out of 1200000 for 2000
  28 hyphenation exceptions out of 8191
  35i,11n,43p,240b,395s stack positions out of 5000i,500n,6000p,200000b,5000s
@@ -1133,9 +1138,9 @@ hare/texmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive
 /fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/
 palatino/uplr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/palatino/uplri8a.
 pfb>
-Output written on master.pdf (9 pages, 132492 bytes).
+Output written on master.pdf (12 pages, 149859 bytes).
 PDF statistics:
- 202 PDF objects out of 1000 (max. 8388607)
- 30 named destinations out of 1000 (max. 131072)
- 50846 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 244 PDF objects out of 1000 (max. 8388607)
+ 38 named destinations out of 1000 (max. 131072)
+ 50886 words of extra memory for PDF output out of 51595 (max. 10000000)
 
