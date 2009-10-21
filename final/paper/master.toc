@@ -1,0 +1,20 @@
+\select@language {english}
+\contentsline {chapter}{Contents}{i}{section*.1}
+\contentsline {section}{Introduction}{ii}{section*.2}
+\contentsline {section}{Problem 1: Mandatory}{ii}{section*.3}
+\contentsline {section}{Problem 2: Taylor}{ii}{section*.4}
+\contentsline {subsection}{Taylor Series}{ii}{section*.5}
+\contentsline {subsection}{Taylor's Theorem}{ii}{section*.6}
+\contentsline {section}{Problem 3: Line Search Methods}{ii}{section*.7}
+\contentsline {subsection}{Armijo Conditions}{ii}{section*.8}
+\contentsline {subsection}{Wolfe Conditions}{iii}{section*.9}
+\contentsline {subsection}{Armijo Back-tracking}{iii}{section*.10}
+\contentsline {section}{Problem 4: Trust Region Methods}{iv}{section*.11}
+\contentsline {subsection}{Levenberg-Marquardt}{iv}{section*.12}
+\contentsline {subsection}{Dogleg}{iv}{section*.13}
+\contentsline {section}{Problem 5: First Order Optimality Conditions}{vi}{section*.14}
+\contentsline {section}{Problem 8: Splitting Method}{vi}{section*.15}
+\contentsline {paragraph}{Case 1: }{vii}{section*.16}
+\contentsline {paragraph}{Case 2:}{vii}{section*.17}
+\contentsline {section}{Conclusion}{viii}{section*.18}
+\contentsline {section}{Source Code}{viii}{section*.19}

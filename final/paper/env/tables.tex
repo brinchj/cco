@@ -1,0 +1,23 @@
+
+%\usepackage{tocloft}
+%\addtolength{\cftfignumwidth}{3em}
+
+\usepackage{float}
+
+\newcommand{\inputtable}[1]
+{
+  \IfFileExists{#1} {
+    \input{#1}
+  }{
+  Missing table {#1}\fixme{Table for {#1}}
+  }
+}
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../master"
+%%% End:

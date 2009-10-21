@@ -1,0 +1,17 @@
+\BOOKMARK [0][-]{section*.1}{Contents}{}
+\BOOKMARK [1][-]{section*.2}{Introduction}{section*.1}
+\BOOKMARK [1][-]{section*.3}{Problem 1: Mandatory}{section*.1}
+\BOOKMARK [1][-]{section*.4}{Problem 2: Taylor}{section*.1}
+\BOOKMARK [2][-]{section*.5}{Taylor Series}{section*.4}
+\BOOKMARK [2][-]{section*.6}{Taylor's Theorem}{section*.4}
+\BOOKMARK [1][-]{section*.7}{Problem 3: Line Search Methods}{section*.1}
+\BOOKMARK [2][-]{section*.8}{Armijo Conditions}{section*.7}
+\BOOKMARK [2][-]{section*.9}{Wolfe Conditions}{section*.7}
+\BOOKMARK [2][-]{section*.10}{Armijo Back-tracking}{section*.7}
+\BOOKMARK [1][-]{section*.11}{Problem 4: Trust Region Methods}{section*.1}
+\BOOKMARK [2][-]{section*.12}{Levenberg-Marquardt}{section*.11}
+\BOOKMARK [2][-]{section*.13}{Dogleg}{section*.11}
+\BOOKMARK [1][-]{section*.14}{Problem 5: First Order Optimality Conditions}{section*.1}
+\BOOKMARK [1][-]{section*.15}{Problem 8: Splitting Method}{section*.1}
+\BOOKMARK [1][-]{section*.18}{Conclusion}{section*.1}
+\BOOKMARK [1][-]{section*.19}{Source Code}{section*.1}

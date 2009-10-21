@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                    Forside
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter % open mode for reading @ signed variables
+\def\maketitle{%
+ \null
+ \thispagestyle{empty}%
+ \vfill
+ \begin{center}\leavevmode
+   \normalfont
+   \LARGE{\raggedleft \@title\par}%
+   \hrulefill\par
+   \large{\raggedleft \subtitle\par}%
+   \vskip 2cm
+   {\today\par}%
+ \end{center}%
+ \vfill
+ \begin{flushleft}
+   {\large \@author } \\
+   {\footnotesize \suplementInfo }
+ \end{flushleft}
+ \clearpage % Terminates the page here. Everything else vil be placed
+            % on next page.
+}
+\makeatother % closing mode for reading @ signed variables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               Data til forside
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Final Hand In $\cdot$ Week VIII}
+
+\def\subtitle{CCO $\cdot$ Constraint Continuous Optimization}
+
+\author{Johan Sejr Brinch Nielsen} \def\suplementInfo{
+
+\kern 5pt \hrule width 11pc \kern 5pt
+
+\begin{tabular}{ll}
+Email: & zerrez@diku.dk  \\
+Cpr.:  & 260886-2547
+\end{tabular}
+
+% putter 5pt spacing oven over og neden under stregen
+\kern 5pt \hrule width 11pc \kern 5pt
+
+Dept. of Computer Science,  \\
+University of Copenhagen
+
+}
