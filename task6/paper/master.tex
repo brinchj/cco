@@ -230,14 +230,59 @@ This transformation to QP shows that it is possible to solve LCP
 problems using QP methods.
 
 
-
 \section{Convergence Rate}
+I am sorry for the lack of vector graphics in this paper. Time was not
+on my side. All simulations have 100 balls in a 300x300 box. The size
+of the border balls are 10.
+
+The first graph is the convergence graph at time step 110. It shows
+the error at each iteration (up to about 110).
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{images/s0110.png}
+\end{figure}
+This graph suggests either superlinear convergence. The curve bends
+slightly downwards.
+
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{images/s0115.png}
+\end{figure}
+This curve from time step 115 also bends downwards. Once again
+suggesting superlinear convergence.
+
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{images/s1228.png}
+\end{figure}
+This graph resembles what I see in most of my 250 generated graphs. A
+very sharp curve reaching a low error and plenty of iterations. My
+terminating condition is an error lower than $0.00001$ or 20000
+iterations used. These numbers could probably be lowered, however as I
+see it, the bottleneck of the simulation is MatLab's drawing
+functions.
+
+
+This graph shows the number of iterations used throughout each 1000
+time steps:
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{images/total.png}
+\end{figure}
+It is clear from this graph, that the first 100 iterations or so are
+quite simple. Then the problems get more complicated and the number of
+iterations go up and variate more. The problems does not seem to get
+easier by iteration 1000.
 
 
 \section{Verification}
+In this section, I present my verification of the implementation.
 
 
-\subsection{Movie 1 - Falling Balls}
+\subsection{Movie of Falling Balls}
+I have submitted the movie ``balls.mpg'' together with this paper. It
+shows a number of simulation images joined together in a movie. This
+movie suggests a correct implementation, since the balls seems to fall
+in a ``natural'' way (as natural as I would expect from this
+simulation).
 
 
 
@@ -246,6 +291,12 @@ problems using QP methods.
 
 
 \section{Conclusion}
+I have implemented derived and implemented the Splitting method as
+well as investigating its convergence rate. I have shown the relation
+between Linear Complementarity Problems and Quadratic Problems. I have
+empirically verified the correctness of the implementation by
+producing a movie of a simulation (necessary condition for
+correctness: Simulations seem OK).
 
 
 \appendix

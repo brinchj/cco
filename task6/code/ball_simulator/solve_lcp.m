@@ -1,4 +1,4 @@
-function lambda = solve_lcp(A, b, lambda)
+function [ lambda count ] = solve_lcp(A, b, lambda)
 % SOLVE_LCP - Solve the LCP problem
 % input:
 %    A    - A square symmetric positive (semi) definite matrix.
@@ -60,12 +60,12 @@ function lambda = solve_lcp(A, b, lambda)
         res   = [res error];
     end
 
-    if count > 100
-        name = strcat('plots_conv/s', sprintf('%04d', count), '.eps');
-        fig = figure(2);
-        semilogy(res);
-        print('-deps', name);
-        close(fig);
-    end
+    %if count > 100
+    %     name = strcat('plots_conv/s', sprintf('%04d', count), '.eps');
+    %     fig = figure(2);
+    %     semilogy(res);
+    %     print('-deps', name);
+    %     close(fig);
+    % end
 
 end

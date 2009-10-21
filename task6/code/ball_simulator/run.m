@@ -7,16 +7,26 @@ lambda = 1;
 
 iters = 1000;
 
-M = moviein(iters);
+%M = moviein(iters);
 fig = figure(1);
 
 %set(fig, 'Renderer', 'OpenGL');
 
+counts = []
+
 for i=1:iters
     info   = collision_detection(config);
-    [config lambda] = integrate(config, info, 0.015, lambda);
+    [config lambda count] = integrate(config, info, 0.015, lambda);
+    counts = [ counts count ];
 
-    if mod(i, 1) == 0
+    % if mod(i, 16) == 0
+    %     name = 'plots_conv/total.eps'
+    %     fig = figure(2);
+    %     semilogy(counts);
+    %     print('-deps', name);
+    % end
+
+    if mod(i, 8) == 0
         figure(fig);
         clf;
 
@@ -25,12 +35,18 @@ for i=1:iters
         draw_info( config, info );
         hold off;
         axis square;
-    end
 
-    %name = strcat('plots_num/s',sprintf('%04d',i),'.png');
-    %print('-dpng', name);
+        %name = strcat('plots_num/s',sprintf('%04d',i),'.png');
+        %print('-dpng', name);
+    end
 
     %M(:,i) = getframe;
 end
 
-%mpgwrite(M, jet, 'movie.mpg');
+% name = 'plots_conv/total.eps'
+% fig = figure(2);
+% semilogy(counts);
+% print('-deps', name);
+
+
+

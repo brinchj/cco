@@ -1,4 +1,4 @@
-function [ config lambda ] = integrate(config, info, dt, lambda)
+function [ config lambda count ] = integrate(config, info, dt, lambda)
 
 X = config.X;
 Y = config.Y;
@@ -33,7 +33,7 @@ if( C>0)
   W = diag( [w; w] );
   A = J*W*J';
   b = J*u + dt*J*W*[Fx; Fy];
-  lambda = solve_lcp(A,b,lambda);
+  [ lambda count ] = solve_lcp(A,b,lambda);
 end
 
 % Compute the resulting contact forces in body-space
